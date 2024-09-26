@@ -15,6 +15,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>hexagonal</groupId>
+      <artifactId>hexagonal-application</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
