@@ -1,4 +1,4 @@
-package hexagonal.service;
+package hexagonal.service.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,6 +8,7 @@ import hexagonal.domain.Salute;
 import hexagonal.domain.User;
 import hexagonal.ports.in.GreetRequest;
 import hexagonal.ports.out.GreetResponse;
+import hexagonal.service.GreetService;
 
 public class GreetServiceTest {
 
