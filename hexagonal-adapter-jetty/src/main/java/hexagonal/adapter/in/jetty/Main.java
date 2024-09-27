@@ -12,6 +12,7 @@ import org.eclipse.jetty.server.handler.DefaultHandler;
 
 import hexagonal.domain.Salute;
 import hexagonal.domain.User;
+import hexagonal.ports.exception.GreetException;
 import hexagonal.ports.in.GreetRequest;
 import hexagonal.ports.out.GreetResponse;
 import hexagonal.service.GreetService;
@@ -24,11 +25,17 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         var server = newServer(8080);
+
         server.start();
+        try {
 
-        System.console().readLine("Hit ENTER to stop");
+            System.console().readLine("Hit ENTER to stop");
 
-        server.stop();
+        } catch (Exception ignore) {
+
+        } finally {
+            server.stop();
+        }
     }
 
     public static Server newServer(int port) throws IOException {
@@ -52,23 +59,30 @@ public class Main {
             protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
 
-                service.greet(new GreetRequest() {
+                try {
+                    service.greet(new GreetRequest() {
 
-                    @Override
-                    public User readUser() {
-                        return new User(request.getParameter("name"));
-                    }
+                        @Override
+                        public User readUser() throws GreetException {
+                            return new User(request.getParameter("name"));
+                        }
 
-                }, new GreetResponse() {
+                    }, new GreetResponse() {
 
-                    @Override
-                    public void writeSalute(Salute salute) throws IOException {
-                        response.setHeader("Content-Type", "text/plain");
-                        response.getWriter().print(salute.message());
-                        response.getWriter().flush();
-                    }
+                        @Override
+                        public void writeSalute(Salute salute) throws GreetException {
+                            response.setHeader("Content-Type", "text/plain");
+                            try {
+                                response.getWriter().print(salute.message());
+                            } catch (IOException e) {
+                                throw new GreetException(e);
+                            }
+                        }
 
-                });
+                    });
+                } catch (GreetException e) {
+                    throw new ServletException(e);
+                }
             }
         }, "/");
 
