@@ -2,6 +2,8 @@ package hexagonal.service.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 import hexagonal.domain.Salute;
@@ -13,7 +15,7 @@ import hexagonal.service.GreetService;
 public class GreetServiceTest {
 
     @Test
-    public void greetTest() {
+    public void greetTest() throws IOException {
         var service = new GreetService();
         service.greet(new GreetRequest() {
 

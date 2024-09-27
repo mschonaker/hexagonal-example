@@ -45,7 +45,6 @@
               <mainClass>hexagonal.adapter.in.console.Main</mainClass>
             </manifest>
           </archive>
-          <finalName>${project.build.finalName}</finalName>
           <appendAssemblyId>false</appendAssemblyId>
         </configuration>
         <executions>

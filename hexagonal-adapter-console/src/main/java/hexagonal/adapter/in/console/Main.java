@@ -1,5 +1,7 @@
 package hexagonal.adapter.in.console;
 
+import java.io.IOException;
+
 import hexagonal.domain.Salute;
 import hexagonal.domain.User;
 import hexagonal.ports.in.GreetRequest;
@@ -8,7 +10,7 @@ import hexagonal.service.GreetService;
 
 public class Main {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws IOException {
 
         var console = System.console();
 
