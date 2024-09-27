@@ -6,9 +6,16 @@
 mvn clean install 
 ```
 
-## Run the console app
+## Run the (interactive) console app
 
 ```shell
 java -jar hexagonal-adapter-console/target/**.jar
 ```
 
+## Run the JSON REST application
+
+java -jar hexagonal-adapter-jetty/target/**.jar
+
+```shell
+curl http://localhost:8080/\?name\=Curl
+```
