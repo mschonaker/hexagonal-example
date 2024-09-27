@@ -12,7 +12,7 @@ mvn clean install
 java -jar hexagonal-adapter-console/target/**.jar
 ```
 
-## Run the JSON REST application
+## Run the web application
 
 java -jar hexagonal-adapter-jetty/target/**.jar
 
